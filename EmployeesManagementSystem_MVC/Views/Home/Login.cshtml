@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<form action="/Home/Login" method="post">
+    <div class="form-group">
+        <label for="userName">Username</label>
+        <input class="form-control" name="username" type="text" required/>
+        <label for="userPassword">Password</label>
+        <input class="form-control" name="userPassword" type="password" required/>
+        <br />
+        <div class="form-group">
+            <button class="btn btn-default" type="submit">Login</button>
+            <button class="btn btn-default" type="reset">Reset</button>
+        </div>
+    </div>
+</form>
+

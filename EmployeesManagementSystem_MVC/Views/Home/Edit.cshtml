@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Employee</h2>
+
+@{
+    var context = new DB_EmployeesEntities();
+    var tocList = context.Employees.Select(p => p.TitleOfCourtesy).Distinct().ToList();
+    var cList = context.Employees.Select(p => p.City).Distinct().ToList();
+}
+
+@model EmployeesManagementSystem_MVC.Employees
+
+<form action="/Home/Edit" method="post">
+    <input type="hidden" name="ID" value="@Model.EmployeeID"/>
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input class="form-control" type="text" name="firstName" value="@Model.FirstName" required/>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input class="form-control" type="text"name="lastName" value="@Model.LastName" required/>
+    </div>
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-control" type="text" name="title" value="@Model.Title" required/>
+    </div>
+    <div class="form-group">
+        <label for="titleOfCourtesy">Title Of Courtesy</label>
+        <select class="form-control" name="titleOfCourtesy">
+            @foreach (var item in tocList)
+            {
+                <option @(item == Model.TitleOfCourtesy ? "selected" : "")>@item</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="city">City</label>
+        <select class="form-control" name="city">
+            @foreach (var item in cList)
+            {
+                <option @(item == Model.City ? "selected" : "")>@item</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-default" type="submit" @*onclick="return confirm('Do you want to save changes?')"*@>Edit</button>
+        <button class="btn btn-default" type="reset">Reset</button>
+    </div>
+</form>

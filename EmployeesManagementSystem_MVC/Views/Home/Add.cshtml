@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add new Employee</h2>
+
+@{
+    var context = new DB_EmployeesEntities();
+    var tocList = context.Employees.Select(p => p.TitleOfCourtesy).Distinct().ToList();
+    var cList = context.Employees.Select(p => p.City).Distinct().ToList();
+}
+
+<form action="/Home/Add" method="post">
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input class="form-control" type="text" name="firstName" required/>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input class="form-control" type="text" name="lastName" required/>
+    </div>
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-control" type="text" name="title" required/>
+    </div>
+    <div class="form-group">
+        <label for="titleOfCourtesy">Title Of Courtesy</label>
+        <select class="form-control" name="titleOfCourtesy">
+            @foreach (var item in tocList)
+            {
+                <option>@item</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="city">City</label>
+        <select class="form-control" name="city">
+            @foreach (var item in cList)
+            {
+                <option>@item</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-default" type="submit" @*onclick="return confirm('Do you want to save Employee?')"*@>Add</button>
+        <button class="btn btn-default" type="reset">Reset</button>
+    </div>
+</form>
